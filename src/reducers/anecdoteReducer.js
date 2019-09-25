@@ -22,8 +22,30 @@ const initialState = anecdotesAtStart.map(asObject)
 const reducer = (state = initialState, action) => {
   console.log('state now: ', state)
   console.log('action', action)
-
+  // eslint-disable-next-line default-case
+  switch (action.type) {
+    case 'addOne':
+      const id = action.data.id
+      const anecdoteToChange = state.find(n => n.id === id)
+      const changedAnecdote = { 
+        ...anecdoteToChange, 
+        votes: anecdoteToChange.votes + 1
+      }
+      return state.map(anecdote =>
+        anecdote.id !== id ? anecdote : changedAnecdote
+      )
+  }
   return state
 }
+
+//ACTION CREATORS
+
+export const addToVote = (id) => {
+  return {
+    type: "addOne",
+    data: { id }
+  }
+}
+
 
 export default reducer
