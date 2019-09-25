@@ -14,4 +14,11 @@ const render = () => {
 }
 
 render()
+
 store.subscribe(render)
+store.subscribe(() => {
+  const storeNow = store.getState()
+  storeNow.sort(function(a, b) {
+    return b.votes - a.votes;
+  });
+})
