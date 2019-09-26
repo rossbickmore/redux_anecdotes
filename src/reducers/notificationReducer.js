@@ -1,21 +1,23 @@
-const notificationReducer = (state = "ALL", action) => {
+const notificationReducer = (state = "", action) => {
     console.log('state now: ', state)
     console.log('action', action)
   
     // eslint-disable-next-line default-case
     switch (action.type) {
-      case 'FILTER': 
-      return action.type
+        case 'VOTE': 
+            return action.data
     }
     return state
 }
-  
+
   //ACTION CREATORS
   
-export const filter = () => {
+export const toggleCurrentVote = (id) => {
     return {
-      type: "FILTER"
+      type: "VOTE",
+      data: { id } 
     }
 }
+
 
 export default notificationReducer

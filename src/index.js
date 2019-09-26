@@ -6,7 +6,7 @@ import anecdoteReducer from './reducers/anecdoteReducer'
 import notificationReducer from './reducers/notificationReducer'
 
 const reducer = combineReducers({
-  notification: notificationReducer,
+  currentVote: notificationReducer,
   anecdotes: anecdoteReducer
 })
 

@@ -1,4 +1,4 @@
-const anecdotesAtStart = [
+export const anecdotesAtStart = [
   'If it hurts, do it more often',
   'Adding manpower to a late software project makes it later!',
   'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
@@ -25,7 +25,7 @@ const anecdoteReducer = (state = initialState, action) => {
   console.log('action', action)
   // eslint-disable-next-line default-case
   switch (action.type) {
-    case 'addOne':
+    case 'ADDONE':
       const id = action.data.id
       const anecdoteToChange = state.find(n => n.id === id)
       const changedAnecdote = { 
@@ -35,7 +35,7 @@ const anecdoteReducer = (state = initialState, action) => {
       return state.map(anecdote =>
         anecdote.id !== id ? anecdote : changedAnecdote
       )
-      case 'createAnecdote':
+      case 'CREATEANECDOTE':
         return [...state, action.data]
   }
   return state
@@ -44,14 +44,14 @@ const anecdoteReducer = (state = initialState, action) => {
 
 export const addToVote = (id) => {
   return {
-    type: "addOne",
+    type: "ADDONE",
     data: { id }
   }
 }
 
 export const createAnecdote = (content) => {
   return {
-    type: "createAnecdote",
+    type: "CREATEANECDOTE",
     data: {
       content,
       id: getId(),

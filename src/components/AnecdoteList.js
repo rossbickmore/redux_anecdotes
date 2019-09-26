@@ -1,5 +1,6 @@
 import React from 'react';
 import { addToVote } from '../reducers/anecdoteReducer'
+import { toggleCurrentVote } from '../reducers/notificationReducer'
 
 function AnecdoteList(props) {
     const anecdotes = props.store.getState().anecdotes
@@ -8,9 +9,13 @@ function AnecdoteList(props) {
     const vote = (id) => {
     console.log('vote', id)
     props.store.dispatch(
-      addToVote(id)
+        addToVote(id)
+    )
+    props.store.dispatch(
+        toggleCurrentVote(id)
     )
     }
+
 
     return (
         <div>
