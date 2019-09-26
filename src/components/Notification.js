@@ -10,20 +10,23 @@ const Notification = (props) => {
     borderWidth: 1
   }
 
-  const displayCurrentVote = (id, anecdotes) => {
-    if ( currentVote === "") { 
-      return "NA"
-    } else {
+  const displayCurrentVote = (currentVote, anecdotes) => {
       const id = currentVote.id
       return [...anecdotes].filter( anecdote => anecdote.id === id)[0].content
-    }
   }
 
+  if (currentVote !== "") {
+    return (
+      <div style={style}>
+        {"you voted for "+displayCurrentVote(currentVote, anecdotes)}
+      </div>
+    )
+  } 
+
   return (
-    <div style={style}>
-      you voted for {displayCurrentVote(currentVote, anecdotes)}
-    </div>
+    null
   )
+
 }
 
 export default Notification

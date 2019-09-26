@@ -1,6 +1,7 @@
 import React from 'react';
 import { addToVote } from '../reducers/anecdoteReducer'
 import { toggleCurrentVote } from '../reducers/notificationReducer'
+import { removeNotification } from '../reducers/notificationReducer'
 
 function AnecdoteList(props) {
     const anecdotes = props.store.getState().anecdotes
@@ -14,6 +15,9 @@ function AnecdoteList(props) {
     props.store.dispatch(
         toggleCurrentVote(id)
     )
+    setTimeout(() => {
+        props.store.dispatch(removeNotification())
+      }, 5000)
     }
 
 

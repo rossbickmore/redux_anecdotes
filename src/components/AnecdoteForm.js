@@ -11,6 +11,7 @@ function AnecdoteList(props) {
           createAnecdote(content)
         )
     }
+    
     return (
         <div>
         <h2>create new</h2>

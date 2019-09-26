@@ -6,6 +6,8 @@ const notificationReducer = (state = "", action) => {
     switch (action.type) {
         case 'VOTE': 
             return action.data
+        case 'REMOVE': 
+            return ""
     }
     return state
 }
@@ -16,6 +18,12 @@ export const toggleCurrentVote = (id) => {
     return {
       type: "VOTE",
       data: { id } 
+    }
+}
+
+export const removeNotification = (id) => {
+    return {
+      type: "REMOVE"
     }
 }
 
