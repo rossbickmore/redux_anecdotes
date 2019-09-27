@@ -1,20 +1,24 @@
 import React from 'react';
 import { createAnecdote } from '../reducers/anecdoteReducer'
 import { connect } from 'react-redux'
+import anecdoteService from '../services/anecdotes'
 
 function AnecdoteForm(props) {
 
-    const newAnecdote = (e) => {
+    const addAnecdote = async (e) => {
         e.preventDefault()
-        let content = e.target.anecdote.value
+        const content = e.target.anecdote.value
+        console.log("content", content)
         e.target.anecdote.value = ""
-        props.createAnecdote(content)
+        const newAnecdote = await anecdoteService.createNew(content)
+        props.createAnecdote(newAnecdote)
     }
     
+
     return (
         <div>
         <h2>create new</h2>
-        <form onSubmit={newAnecdote}>
+        <form onSubmit={addAnecdote}>
         <div><input name="anecdote"/></div>
         <button type="submit">create</button>
         </form>
@@ -23,9 +27,6 @@ function AnecdoteForm(props) {
 }
 
 
-const mapDispatchToProps = {
-    createAnecdote
-  }
 
 
 export default connect(

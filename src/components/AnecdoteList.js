@@ -4,6 +4,7 @@ import { toggleCurrentVote } from '../reducers/notificationReducer'
 import { removeNotification } from '../reducers/notificationReducer'
 import { connect } from 'react-redux'
 
+
 function AnecdoteList(props) {
     console.log(props.anecdotes)
 
