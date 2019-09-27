@@ -1,8 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 const Notification = (props) => {
-
-  const { currentVote, anecdotes } = props.store.getState()
 
   const style = {
     border: 'solid',
@@ -15,10 +14,10 @@ const Notification = (props) => {
       return [...anecdotes].filter( anecdote => anecdote.id === id)[0].content
   }
 
-  if (currentVote !== "") {
+  if (props.currentVote !== "") {
     return (
       <div style={style}>
-        {"you voted for "+displayCurrentVote(currentVote, anecdotes)}
+        {"you voted for "+displayCurrentVote(props.currentVote, props.anecdotes)}
       </div>
     )
   } 
@@ -29,4 +28,12 @@ const Notification = (props) => {
 
 }
 
-export default Notification
+const mapStateToProps = (state) => {
+  return {
+    anecdotes: state.anecdotes,
+    currentVote: state.currentVote
+  }
+}
+
+const ConnectedNotification = connect(mapStateToProps)(Notification)
+export default ConnectedNotification

@@ -2,21 +2,17 @@ import React from 'react';
 import { addToVote } from '../reducers/anecdoteReducer'
 import { toggleCurrentVote } from '../reducers/notificationReducer'
 import { removeNotification } from '../reducers/notificationReducer'
+import { connect } from 'react-redux'
 
 function AnecdoteList(props) {
-    const anecdotes = props.store.getState().anecdotes
-    console.log(anecdotes)
+    console.log(props.anecdotes)
 
     const vote = (id) => {
     console.log('vote', id)
-    props.store.dispatch(
-        addToVote(id)
-    )
-    props.store.dispatch(
-        toggleCurrentVote(id)
-    )
+    props.addToVote(id)
+    props.toggleCurrentVote(id)
     setTimeout(() => {
-        props.store.dispatch(removeNotification())
+        props.removeNotification()
       }, 5000)
     }
 
@@ -24,7 +20,7 @@ function AnecdoteList(props) {
     return (
         <div>
         <h2>Anecdotes</h2>
-            {anecdotes.map(anecdote =>
+            {props.anecdotes.map(anecdote =>
             <div key={anecdote.id}>
             <div>
                 {anecdote.content}
@@ -39,5 +35,16 @@ function AnecdoteList(props) {
     )
 }
 
+const mapStateToProps = (state) => {
+    return {
+      anecdotes: state.anecdotes
+    }
+}
 
-export default AnecdoteList
+const mapDispatchToProps = {
+    addToVote,
+    toggleCurrentVote,
+    removeNotification
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(AnecdoteList)
